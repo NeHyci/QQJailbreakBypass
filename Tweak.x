@@ -24,23 +24,33 @@
   return %orig;
 }
 %end
+
 %hook QQWalletInjectReportTool
 + (bool)isForbidVerify {
   return true;
 }
 %end
+
 %hook QQJSBridgeDevicePlugin
 - (bool)handleJsBridgeRequest_device_isJailBreakend:(id)arg1 {
   arg1 = 0;
   return true;
 }
 %end
+
+%hook CFT_F538913
++ (bool)CFT_F522771:(Class)arg1 selector:(SEL)arg1 {
+  return false;
+}
+%end
+
 %hook UIApplication
 - (BOOL)canOpenURL:(NSURL *)url {
   if ([url.scheme isEqualToString:@"cydia"]) return NO;
   return %orig;
 }
 %end
+
 %hook NSString
 + (BOOL)containsString:(NSString *)str {
   if ([str isEqualToString:@"libCapMockForQQ"]) return YES;
@@ -48,6 +58,7 @@
   return %orig;
 }
 %end
+
 %hookf(const char *, _dyld_get_image_name, uint32_t index) {
   const char *ret = %orig(index);
   if (ret) {
