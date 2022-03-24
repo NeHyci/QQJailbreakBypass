@@ -39,7 +39,7 @@
 %end
 
 %hook CFT_F538913
-+ (bool)CFT_F522771:(Class)arg1 selector:(SEL)arg1 {
++ (bool)CFT_F522771:(Class)arg1 selector:(SEL)arg2 {
   return false;
 }
 %end
